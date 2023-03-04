@@ -1,5 +1,92 @@
-.layout {
-  width: 500px;
-  height: 500px;
-  background-color: #282c34;
+@import "mixins.scss";
+
+@media screen and (max-width: 768px) {
+  #layout {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #layout {
+    width: 430px;
+    height: 950px;
+  }
+}
+
+#layout {
+  background-color: #161b22;
+  overflow: hidden;
+  position: relative;
+  #menu {
+    position: absolute;
+    background-color: #444444;
+    border-radius: 0 15px 15px 0;
+    width: 80%;
+    height: 100%;
+    left: -80%;
+  }
+  .menuOpend {
+    transform: translate(100%);
+    transition: 0.2s;
+  }
+  .menuClosed {
+    transform: translate(-100%);
+    transition: 0.2s;
+  }
+  .menuBtn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: transparent;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    #closeMenuT {
+      @include closeMenu-property($top: 50%, $trY: -150%, $rotate: 45deg);
+    }
+    #closeMenuM {
+      @include closeMenu-property(
+        $top: 50%,
+        $left: 0,
+        $trY: -50%,
+        $width: 30px
+      );
+    }
+    #closeMenuB {
+      @include closeMenu-property($top: 50%, $trY: 50%, $rotate: -45deg);
+    }
+    #openMenuT {
+      @include openMenu-property($top: 0);
+    }
+    #openMenuM {
+      @include openMenu-property($top: 50%);
+    }
+    #openMenuB {
+      @include openMenu-property($top: 100%);
+    }
+  }
+  #addBtn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 75px;
+    height: 75px;
+    border: none;
+    border-radius: 50%;
+    background-color: #238636;
+    cursor: pointer;
+    #plusIcon {
+      position: relative;
+      #plusIconH {
+        @include plusIcon-property($width: 5px, $height: 30px);
+      }
+      #plusIconV {
+        @include plusIcon-property($width: 30px, $height: 5px);
+      }
+    }
+  }
+  #addBtn:hover {
+    background-color: #2ea043;
+  }
 }

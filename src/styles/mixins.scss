@@ -1,0 +1,40 @@
+@mixin plusIcon-property($width, $height) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $width;
+  height: $height;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+}
+
+@mixin openMenu-property($top: 0) {
+  position: absolute;
+  top: $top;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 5px;
+  width: 30px;
+  height: 5px;
+  transition: 0.2s;
+}
+
+@mixin closeMenu-property(
+  $top: 0,
+  $left: 50%,
+  $width: 19px,
+  $rotate: 0,
+  $trY: 0
+) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translateY($trY) rotate($rotate);
+  // transform: rotate($rotate);
+  background-color: white;
+  border-radius: 5px;
+  width: $width;
+  height: 5px;
+  transition: 0.2s;
+}
