@@ -1,0 +1,49 @@
+@import "mixins.scss";
+// arrow button
+#rightArrowTop {
+  @include arrow-property(
+    $top: 50%,
+    $trX: -100%,
+    $left: 100%,
+    $trY: -150%,
+    $rotate: 45deg
+  );
+}
+#rightArrowMiddle {
+  @include arrow-property(
+    $top: 50%,
+    $left: 10%,
+    $trX: -30%,
+    $trY: -50%,
+    $width: 30px
+  );
+}
+#rightArrowBottom {
+  @include arrow-property(
+    $top: 50%,
+    $trX: -100%,
+    $left: 100%,
+    $trY: 50%,
+    $rotate: -45deg
+  );
+}
+#leftArrowTop {
+  @include arrow-property($top: 50%, $trY: -150%, $rotate: -45deg);
+}
+#leftArrowMiddle {
+  @include arrow-property($top: 50%, $left: 10%, $trY: -50%, $width: 30px);
+}
+#leftArrowBottom {
+  @include arrow-property($top: 50%, $trY: 50%, $rotate: 45deg);
+}
+
+// menu button
+#openMenuTop {
+  @include openMenu-property($top: 0);
+}
+#openMenuMiddle {
+  @include openMenu-property($top: 50%);
+}
+#openMenuBottom {
+  @include openMenu-property($top: 100%);
+}

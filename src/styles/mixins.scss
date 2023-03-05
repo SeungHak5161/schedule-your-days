@@ -17,24 +17,23 @@
   border-radius: 5px;
   width: 30px;
   height: 5px;
-  transition: 0.2s;
 }
 
-@mixin closeMenu-property(
+@mixin arrow-property(
   $top: 0,
-  $left: 50%,
+  $left: 0,
   $width: 19px,
   $rotate: 0,
+  $trX: 0,
   $trY: 0
 ) {
   position: absolute;
   top: $top;
   left: $left;
-  transform: translateY($trY) rotate($rotate);
+  transform: translate($trX, $trY) rotate($rotate);
   // transform: rotate($rotate);
   background-color: white;
   border-radius: 5px;
   width: $width;
   height: 5px;
-  transition: 0.2s;
 }

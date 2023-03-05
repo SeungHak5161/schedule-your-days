@@ -1,4 +1,5 @@
 @import "mixins.scss";
+@import "element.scss";
 
 @media screen and (max-width: 768px) {
   #layout {
@@ -18,6 +19,7 @@
   background-color: #161b22;
   overflow: hidden;
   position: relative;
+  // side menu
   #menu {
     position: absolute;
     background-color: #444444;
@@ -25,6 +27,7 @@
     width: 80%;
     height: 100%;
     left: -80%;
+    z-index: 1;
   }
   .menuOpend {
     transform: translate(100%);
@@ -34,6 +37,8 @@
     transform: translate(-100%);
     transition: 0.2s;
   }
+
+  // navbar
   .menuBtn {
     position: absolute;
     top: 15px;
@@ -42,30 +47,27 @@
     width: 30px;
     height: 25px;
     cursor: pointer;
-    #closeMenuT {
-      @include closeMenu-property($top: 50%, $trY: -150%, $rotate: 45deg);
-    }
-    #closeMenuM {
-      @include closeMenu-property(
-        $top: 50%,
-        $left: 0,
-        $trY: -50%,
-        $width: 30px
-      );
-    }
-    #closeMenuB {
-      @include closeMenu-property($top: 50%, $trY: 50%, $rotate: -45deg);
-    }
-    #openMenuT {
-      @include openMenu-property($top: 0);
-    }
-    #openMenuM {
-      @include openMenu-property($top: 50%);
-    }
-    #openMenuB {
-      @include openMenu-property($top: 100%);
-    }
   }
+  #prevBtn {
+    position: absolute;
+    top: 15px;
+    right: calc(15px + 30px + 15px + 30px + 15px);
+    background-color: transparent;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+  }
+  #nextBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: transparent;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  // add button
   #addBtn {
     position: absolute;
     bottom: 10px;

@@ -1,33 +1,20 @@
 import { useState } from "react";
 import "styles/layout.scss";
+import AddBtn from "./AddBtn";
+import Calendar from "./Calendar";
+import Navbar from "./Navbar";
+import SideMenu from "./SideMenu";
 export const Layout = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   return (
-    <main id="layout">
-      <aside
-        id="menu"
-        className={menuOpened ? "menuOpend" : "menuClosed"}
-      ></aside>
-      {menuOpened ? (
-        <button className="menuBtn" onClick={() => setMenuOpened(!menuOpened)}>
-          <div id="closeMenuT"></div>
-          <div id="closeMenuM"></div>
-          <div id="closeMenuB"></div>
-        </button>
-      ) : (
-        <button className="menuBtn" onClick={() => setMenuOpened(!menuOpened)}>
-          <div id="openMenuT"></div>
-          <div id="openMenuM"></div>
-          <div id="openMenuB"></div>
-        </button>
-      )}
-      <button id="addBtn">
-        <div id="plusIcon">
-          <div id="plusIconH"></div>
-          <div id="plusIconV"></div>
-        </div>
-      </button>
-    </main>
+    <section id="layout">
+      <SideMenu menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
+      <main className={menuOpened && "opacity05"}>
+        <Navbar menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
+        <Calendar />
+      </main>
+      <AddBtn />
+    </section>
   );
 };
 export default Layout;
