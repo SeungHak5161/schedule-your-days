@@ -1,22 +1,37 @@
-import { ddbDocClient } from 'libs/ddbDocClient'
-import { ddbClient } from "libs/ddbClient";
+import AWS from 'aws-sdk'
 import moment from 'moment/moment';
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import awsConfig from 'config/awsConfig';
 
-const params = {
-  TableName: "SCHEDULES_TB",
-  Item: {
-    "POST_NUM": 1,
-    "POST_TIME": moment().format('YYYY-MM-DD HH:mm:ss'),
-  },
+const REGION = "ap-northeast-2"
+
+// AWS.config.update({ region: REGION })
+AWS.config.update({ ...awsConfig.aws_remote_config })
+
+const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+
+const create = async (params) => {
+  try {
+    const data = await ddb.putItem(params)
+    console.log("Success", data);
+  } catch (err) {
+    console.log("Error", err);
+  }
 }
 
-export const create = async () => {
+const readLine = async (params) => {
   try {
-    const data = await ddbDocClient.send(new PutCommand(params));
-    console.log(data);
+    const data = await ddb.getItem(params)
+    console.log("Success", data);
     return data;
   } catch (err) {
-    console.error(err);
+    console.log("Error", err);
   }
-};
+}
+
+// const query = awync (params)=>{
+//   try{
+//     ddb.query
+//   }
+// }
+
+export { ddb, create, readLine };
