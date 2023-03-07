@@ -1,5 +1,6 @@
-import ddbDocClient from './ddbDocClient';
+import ddbDocClient from 'libs/ddbDocClient';
 import moment from 'moment/moment';
+import { useState } from 'react';
 
 const createItem = async (params) => {
   const data = await ddbDocClient.put({ ...params, POST_TIME: moment().format('YYYY-MM-DD HH-mm-SS') }, (err, data) => {
@@ -23,17 +24,17 @@ const readItem = async (params) => {
   return data;
 }
 
-const readAll = async () => {
-  const data = await ddbDocClient.scan({
-    TableName: "SCHEDULES_TB",
-  }, (err, data) => {
-    if (err) {
-      console.error("Error", err);
-    } else {
-      console.log('Scan succeeded:', JSON.stringify(data, null, 2));
-    }
-  })
-  return data;
+const ReadAll = async () => {
+  let item;
+  try {
+    item = ddbDocClient.scan({
+      TableName: "SCHEDULES_TB",
+    }).promise()
+  } catch (err) {
+    console.err("Error", err)
+  }
+
+  return item
 }
 
 const updateItem = async (params) => {
@@ -58,4 +59,4 @@ const deleteItem = async (params) => {
   return data;
 }
 
-export { createItem, readItem, readAll, updateItem, deleteItem };
+export { createItem, readItem, ReadAll, updateItem, deleteItem };
