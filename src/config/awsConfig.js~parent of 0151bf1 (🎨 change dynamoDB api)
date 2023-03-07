@@ -1,0 +1,14 @@
+export const awsConfig = {
+  aws_table_name: 'scheduleYourDays_API',
+  aws_local_config: {
+    region: 'ap-northeast-2',
+    endpoint: 'http://http://localhost:3000'
+  },
+  aws_remote_config: {
+    accessKeyId: "AKIAQVYGI3YISEC2UOP7",
+    secretAccessKey: "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",
+    region: 'ap-northeast-2',
+    endpoint: "http://dynamodb.ap-northeast-2.amazonaws.com"
+  }
+}
+export default awsConfig

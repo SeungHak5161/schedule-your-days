@@ -9,7 +9,7 @@ export const Layout = () => {
   return (
     <section id="layout">
       <SideMenu menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
-      <main className={menuOpened && "opacity05"}>
+      <main className={menuOpened ? "opacity05" : null}>
         <Navbar menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
         <Calendar />
       </main>
