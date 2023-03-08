@@ -23,24 +23,26 @@ export const Calendar = () => {
 
   return (
     <>
-      <ul>
-        {data !== undefined && data.length !== 0
-          ? data.map((item, idx) => {
-              return (
-                <li
-                  key={idx}
-                  style={{
-                    width: "100%",
-                    height: "100px",
-                    backgroundColor: "yellow",
-                  }}
-                >
-                  {item.POST_NUM}
-                </li>
-              );
-            })
-          : null}
-      </ul>
+      <div id="weekWrapper">
+        <ul>
+          {data !== undefined && data.length !== 0
+            ? data.map((item, idx) => {
+                return (
+                  <li
+                    key={idx}
+                    style={{
+                      width: "100%",
+                      height: "100px",
+                      backgroundColor: "yellow",
+                    }}
+                  >
+                    {item.POST_NUM}
+                  </li>
+                );
+              })
+            : null}
+        </ul>
+      </div>
     </>
   );
 };

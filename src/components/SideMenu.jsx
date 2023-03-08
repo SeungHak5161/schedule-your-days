@@ -1,6 +1,6 @@
 export const SideMenu = ({ menuOpened, setMenuOpened }) => {
   return (
-    <aside id="menu" className={menuOpened ? "menuOpend" : "menuClosed"}>
+    <aside id="sideMenu" className={menuOpened ? "menuOpend" : "menuClosed"}>
       <button className="menuBtn" onClick={() => setMenuOpened(!menuOpened)}>
         <div id="leftArrowTop"></div>
         <div id="leftArrowMiddle"></div>
