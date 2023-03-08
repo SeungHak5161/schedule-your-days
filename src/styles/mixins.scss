@@ -37,3 +37,13 @@
   width: $width;
   height: 5px;
 }
+
+@mixin xIcon-propety($rotate) {
+  position: absolute;
+  width: 5px;
+  height: 30px;
+  left: 50%;
+  transform: translateX(-50%) rotate($rotate);
+  background-color: white;
+  border-radius: 5px;
+}

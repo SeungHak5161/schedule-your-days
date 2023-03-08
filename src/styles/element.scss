@@ -47,3 +47,11 @@
 #openMenuBottom {
   @include openMenu-property($top: 100%);
 }
+
+// X Icon
+#xIconFirst {
+  @include xIcon-propety($rotate: 45deg);
+}
+#xIconSecond {
+  @include xIcon-propety($rotate: -45deg);
+}
