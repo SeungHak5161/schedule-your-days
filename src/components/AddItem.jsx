@@ -38,7 +38,9 @@ export const AddItem = ({ bottomOpened, setBottomOpened }) => {
             ></input>
           </div>
         </div>
-        <button id="addItemBtn">추 가</button>
+        <button id="addItemBtn" className="inputMedium">
+          추 가
+        </button>
       </div>
     </div>
   );

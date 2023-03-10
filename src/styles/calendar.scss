@@ -45,15 +45,12 @@
           border: none;
           background-color: transparent;
         }
-        .inputLarge {
-          width: calc(100% - 25px);
-          font-size: 3rem;
-          height: 40px;
+        input:focus {
+          outline: none;
         }
-        .inputMedium {
-          width: 100%;
-          font-size: 2rem;
-        }
+        // input:focus::placeholder {
+        //   color: transparent;
+        // }
       }
       #colorPicker {
         width: 25px;
@@ -65,15 +62,23 @@
     .addItemElem:last-child {
       border-bottom: none;
     }
+    .inputLarge {
+      width: calc(100% - 25px);
+      font-size: 3rem;
+      height: 40px;
+    }
+    .inputMedium {
+      width: 100%;
+      font-size: 2rem;
+    }
     #addItemBtn {
       background-color: var(--blue700);
-      font-weight: 700;
+      font-family: NanumGothicBold, sans-serif;
       width: 80%;
       height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 2rem;
       color: white;
       border-radius: 10px;
     }
