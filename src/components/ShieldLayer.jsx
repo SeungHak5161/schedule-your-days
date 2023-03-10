@@ -1,9 +1,11 @@
-export const ShieldLayer = ({
-  menuOpened,
-  setMenuOpened,
-  bottomOpened,
-  setBottomOpened,
-}) => {
+import { useContext } from "react";
+import { AppContext } from "./Layout";
+export const ShieldLayer = () => {
+  const context = useContext(AppContext);
+  const menuOpened = context.menuOpened;
+  const setMenuOpened = context.setMenuOpened;
+  const bottomOpened = context.bottomOpened;
+  const setBottomOpened = context.setBottomOpened;
   return (
     <div
       id="shieldLayer"

@@ -2,10 +2,13 @@ import { ReadAll } from "libs/ddbApi";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import ddbDocClient from "libs/ddbDocClient";
+import { useContext } from "react";
+import { AppContext } from "./Layout";
 
 export const Calendar = () => {
+  const context = useContext(AppContext);
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
+  const page = context.page;
   const test = [
     { POST_NUM: 2, POST_TIME: "2025-03-08" },
     { POST_NUM: 1, POST_TIME: "2023-03-07 00:32:22" },
@@ -30,7 +33,6 @@ export const Calendar = () => {
       day: day.format("DD"),
     };
   });
-  console.log(week);
   return (
     <>
       <div id="weekWrapper">
@@ -44,9 +46,8 @@ export const Calendar = () => {
             })
           : null} */}
         {week.map((e) => {
-          console.log(e);
           return (
-            <div key={e} className="weekItem normalStatus">
+            <div key={e.month + e.day} className="weekItem normalStatus">
               <div className="dateArea">
                 <div className="dateAreaMonth">{e.month}</div>
                 <div className="dateAreaDay">{e.day}</div>

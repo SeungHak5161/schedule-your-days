@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { createItem } from "libs/ddbApi";
+import { useContext } from "react";
+import { AppContext } from "./Layout";
 
-export const AddItem = ({ bottomOpened, setBottomOpened }) => {
+export const AddItem = () => {
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
+  const context = useContext(AppContext);
+  const bottomOpened = context.bottomOpened;
+  const setBottomOpened = context.setBottomOpened;
   // const [name,setName]=useState("")
   const addHandler = (e) => {
     switch (e.target.id) {

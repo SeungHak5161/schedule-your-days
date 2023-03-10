@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import "styles/layout.scss";
 import AddBtn from "./AddBtn";
 import AddItem from "./AddItem";
@@ -6,28 +6,36 @@ import Calendar from "./Calendar";
 import Navbar from "./Navbar";
 import ShieldLayer from "./ShieldLayer";
 import SideMenu from "./SideMenu";
+export const AppContext = createContext({});
 export const Layout = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [bottomOpened, setBottomOpened] = useState(false);
+  const [page, setPage] = useState(0);
   return (
     <section id="layout">
-      <SideMenu menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
-      <AddItem bottomOpened={bottomOpened} setBottomOpened={setBottomOpened} />
-      <main
-        className={`${menuOpened ? "op05-ts02" : ""} ${
-          bottomOpened ? "op05-ts03" : ""
-        }`}
+      <AppContext.Provider
+        value={{
+          menuOpened,
+          setMenuOpened,
+          bottomOpened,
+          setBottomOpened,
+          page,
+          setPage,
+        }}
       >
-        <Navbar menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
-        <Calendar />
-        <AddBtn setBottomOpened={setBottomOpened} />
-        <ShieldLayer
-          menuOpened={menuOpened}
-          setMenuOpened={setMenuOpened}
-          bottomOpened={bottomOpened}
-          setBottomOpened={setBottomOpened}
-        />
-      </main>
+        <SideMenu />
+        <AddItem />
+        <main
+          className={`${menuOpened ? "op05-ts02" : ""} ${
+            bottomOpened ? "op05-ts03" : ""
+          }`}
+        >
+          <Navbar />
+          <Calendar />
+          <AddBtn />
+          <ShieldLayer />
+        </main>
+      </AppContext.Provider>
     </section>
   );
 };

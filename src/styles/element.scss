@@ -12,8 +12,8 @@
 #rightArrowMiddle {
   @include arrow-property(
     $top: 50%,
-    $left: 10%,
-    $trX: -30%,
+    $left: 0%,
+    $trX: -10%,
     $trY: -50%,
     $width: 30px
   );
