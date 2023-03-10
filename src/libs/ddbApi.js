@@ -1,9 +1,17 @@
-import ddbDocClient from 'libs/ddbDocClient';
-import moment from 'moment/moment';
 import { useState } from 'react';
+import moment from 'moment/moment';
+import { v1 } from 'uuid';
+import ddbDocClient from 'libs/ddbDocClient';
 
 const createItem = async (params) => {
-  const data = await ddbDocClient.put({ ...params, POST_TIME: moment().format('YYYY-MM-DD HH-mm-SS') }, (err, data) => {
+  // const uuid = () => {
+  //   const tokens = v1().split('-')
+  //   console.log(tokens)
+  //   return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4];
+  // }
+  const param = { TableName: "SCHEDULES_TB", Item: { ...params, POST_NUM: v1(), POST_TIME: moment().format('YYYY-MM-DD HH-mm-SS') } }
+  console.log(param)
+  const data = await ddbDocClient.put(param, (err, data) => {
     if (err) {
       console.error("Error", err);
     } else {

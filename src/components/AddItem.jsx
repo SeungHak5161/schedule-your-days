@@ -1,4 +1,26 @@
+import { useState } from "react";
+import { createItem } from "libs/ddbApi";
+
 export const AddItem = ({ bottomOpened, setBottomOpened }) => {
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  // const [name,setName]=useState("")
+  const addHandler = (e) => {
+    switch (e.target.id) {
+      case "itemName":
+        setName(e.target.value);
+        break;
+      case "itemContent":
+        setContent(e.target.value);
+        break;
+      case "addItemBtn":
+        createItem({ NAME: name, CONTENT: content });
+        break;
+      default:
+        console.log("addHandler exception");
+        break;
+    }
+  };
   return (
     <div
       className={`bottomUpLayer ${
@@ -16,7 +38,8 @@ export const AddItem = ({ bottomOpened, setBottomOpened }) => {
               id="itemName"
               className="inputLarge"
               placeholder="제목"
-            ></input>
+              onChange={addHandler}
+            />
           </div>
           <div id="colorPicker"></div>
         </div>
@@ -26,19 +49,16 @@ export const AddItem = ({ bottomOpened, setBottomOpened }) => {
               id="itemContent"
               className="inputMedium"
               placeholder="내용"
-            ></input>
+              onChange={addHandler}
+            />
           </div>
         </div>
         <div className="addItemElem">
           <div className="addItemElemInput">
-            <input
-              id="itemTime"
-              className="inputMedium"
-              placeholder="시간"
-            ></input>
+            <input id="itemTime" className="inputMedium" placeholder="시간" />
           </div>
         </div>
-        <button id="addItemBtn" className="inputMedium">
+        <button id="addItemBtn" className="inputMedium" onClick={addHandler}>
           추 가
         </button>
       </div>
