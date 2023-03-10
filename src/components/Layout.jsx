@@ -14,8 +14,8 @@ export const Layout = () => {
       <SideMenu menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
       <AddItem bottomOpened={bottomOpened} setBottomOpened={setBottomOpened} />
       <main
-        className={`${menuOpened && "op05-ts02"} ${
-          bottomOpened && "op05-ts03"
+        className={`${menuOpened ? "op05-ts02" : ""} ${
+          bottomOpened ? "op05-ts03" : ""
         }`}
       >
         <Navbar menuOpened={menuOpened} setMenuOpened={setMenuOpened} />

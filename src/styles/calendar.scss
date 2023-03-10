@@ -4,9 +4,37 @@
   left: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  gap: 1rem;
+  .weekItem {
+    width: 95%;
+    height: 100px;
+    color: #fff;
+    background-color: var(--grey800);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    .dateArea {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: NanumGothicBold, sans-serif;
+      .dateAreaMonth {
+        font-size: 1.5rem;
+      }
+      .dateAreaDay {
+        font-size: 2rem;
+      }
+    }
+  }
 }
 
+// 아이템 추가 영역
 .bottomUpLayer {
   background-color: var(--grey800);
   position: absolute;

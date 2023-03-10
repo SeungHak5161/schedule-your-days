@@ -1,15 +1,17 @@
 import { ReadAll } from "libs/ddbApi";
 import { useEffect, useState } from "react";
+import moment from "moment";
 import ddbDocClient from "libs/ddbDocClient";
 
 export const Calendar = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
   const test = [
     { POST_NUM: 2, POST_TIME: "2025-03-08" },
     { POST_NUM: 1, POST_TIME: "2023-03-07 00:32:22" },
   ];
   useEffect(() => {
-    const init = async () => {
+    const fetch = async () => {
       try {
         const item = await ReadAll();
         console.log(item.Items);
@@ -18,30 +20,40 @@ export const Calendar = () => {
         console.error(err);
       }
     };
-    init();
+    fetch();
   }, []);
-
+  const datum = [-1, 0, 1, 2, 3, 4, 5];
+  const week = datum.map((e) => {
+    const day = moment().add(7 * page + e, "d");
+    return {
+      month: day.format("MM").replace(/(^0+)/, ""),
+      day: day.format("DD"),
+    };
+  });
+  console.log(week);
   return (
     <>
       <div id="weekWrapper">
-        <ul>
-          {data !== undefined && data.length !== 0
-            ? data.map((item, idx) => {
-                return (
-                  <li
-                    key={idx}
-                    style={{
-                      width: "100%",
-                      height: "100px",
-                      backgroundColor: "yellow",
-                    }}
-                  >
-                    {item.POST_NUM}
-                  </li>
-                );
-              })
-            : null}
-        </ul>
+        {/* {data !== undefined && data.length !== 0
+          ? data.map((item) => {
+              return (
+                <div key={item.POST_NUM} className="weekItem normalStatus">
+                  {item.POST_NUM}
+                </div>
+              );
+            })
+          : null} */}
+        {week.map((e) => {
+          console.log(e);
+          return (
+            <div key={e} className="weekItem normalStatus">
+              <div className="dateArea">
+                <div className="dateAreaMonth">{e.month}</div>
+                <div className="dateAreaDay">{e.day}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </>
   );
