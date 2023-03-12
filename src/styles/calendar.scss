@@ -9,16 +9,15 @@
   gap: 1rem;
   .weekItem {
     width: 95%;
-    height: 100px;
     color: #fff;
     background-color: var(--grey800);
     border-radius: 20px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     padding: 5px;
     .dateArea {
       width: 30px;
-      height: 30px;
+      height: 35px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -31,6 +30,18 @@
         font-size: 2rem;
       }
     }
+  }
+  .normalStatus {
+    height: 100px;
+    transition: 0.2s;
+  }
+  .expandStatus {
+    height: 430px;
+    transition: 0.2s;
+  }
+  .contractStatus {
+    height: 45px;
+    transition: 0.2s;
   }
 }
 

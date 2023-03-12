@@ -11,6 +11,7 @@ export const Layout = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [bottomOpened, setBottomOpened] = useState(false);
   const [page, setPage] = useState(0);
+  const [active, setActive] = useState(null);
   return (
     <section id="layout">
       <AppContext.Provider
@@ -21,6 +22,8 @@ export const Layout = () => {
           setBottomOpened,
           page,
           setPage,
+          active,
+          setActive,
         }}
       >
         <SideMenu />
