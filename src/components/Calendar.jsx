@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import ddbDocClient from "libs/ddbDocClient";
 import { useContext } from "react";
@@ -11,23 +11,51 @@ export const Calendar = () => {
   const setActive = context.setActive;
   const data = context.data;
 
-  const datum = [-1, 0, 1, 2, 3, 4, 5];
-  const week = datum.map((e) => {
-    const day = moment().add(7 * page + e, "d");
-    return {
-      full: day.format("YYYY-MM-DD"),
-      month: day.format("MM").replace(/(^0+)/, ""),
-      day: day.format("DD"),
-    };
-  });
+  const [thisWeek, setThisWeek] = useState([]);
+  const [week, setWeek] = useState([]);
+
+  useEffect(() => {
+    const datum = [-1, 0, 1, 2, 3, 4, 5];
+    setThisWeek(
+      datum.map((e) => {
+        const day = moment().add(7 * page + e, "d");
+        return {
+          idx: e + 1,
+          full: day.format("YYYY-MM-DD"),
+          month: day.format("MM").replace(/(^0+)/, ""),
+          day: day.format("DD"),
+          data: [],
+        };
+      })
+    );
+  }, [page, data]);
+
+  useEffect(() => {
+    console.log("called");
+    setWeek(thisWeek);
+    data.map((e) => {
+      const match = thisWeek.find((day) => {
+        return day.full === e.DATE;
+      });
+      if (match) {
+        let tempWeek = thisWeek.map((e) => {
+          return { ...e };
+        });
+        const tempDay = thisWeek[match.idx];
+        tempDay.data.push(e);
+        tempWeek[match.idx] = tempDay;
+        setWeek(tempWeek);
+      }
+    });
+  }, [thisWeek]);
 
   return (
     <>
       <div id="weekWrapper">
-        {week.map((e, idx) => {
+        {week?.map((day, idx) => {
           return (
             <div
-              key={e.full}
+              key={day.full}
               className={`weekItem ${
                 !active
                   ? "normalStatus"
@@ -40,8 +68,15 @@ export const Calendar = () => {
               }
             >
               <div className="dateArea">
-                <div className="dateAreaMonth">{e.month}</div>
-                <div className="dateAreaDay">{e.day}</div>
+                <div className="dateAreaMonth">{day.month}</div>
+                <div className="dateAreaDay">{day.day}</div>
+              </div>
+              <div className="contentArea">
+                <ul>
+                  {day.data.map((e) => {
+                    return <li key={e.POST_NUM}>{e.NAME}</li>;
+                  })}
+                </ul>
               </div>
             </div>
           );

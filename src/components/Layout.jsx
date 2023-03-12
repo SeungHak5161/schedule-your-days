@@ -20,6 +20,7 @@ export const Layout = () => {
   const fetch = async () => {
     try {
       const item = await ReadAll();
+      console.log("fetch succeed");
       console.log(item.Items);
       setData(item.Items);
     } catch (err) {
@@ -30,6 +31,7 @@ export const Layout = () => {
   useEffect(() => {
     fetch();
   }, []);
+
   return (
     <section id="layout">
       <AppContext.Provider
@@ -44,6 +46,7 @@ export const Layout = () => {
           setActive,
           data,
           setData,
+          fetch,
         }}
       >
         <SideMenu />

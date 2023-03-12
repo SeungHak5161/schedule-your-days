@@ -5,15 +5,18 @@ import { AppContext } from "./Layout";
 import moment from "moment";
 
 export const AddItem = () => {
+  const context = useContext(AppContext);
+  const bottomOpened = context.bottomOpened;
+  const setBottomOpened = context.setBottomOpened;
+  const fetch = context.fetch;
+
   const [name, setName] = useState("");
   const [content, setContent] = useState({
     content: "",
     date: moment().format("YYYY-MM-DD"),
     color: "",
   });
-  const context = useContext(AppContext);
-  const bottomOpened = context.bottomOpened;
-  const setBottomOpened = context.setBottomOpened;
+
   const addHandler = (e) => {
     switch (e.target.id) {
       case "itemName":
@@ -30,7 +33,7 @@ export const AddItem = () => {
           NAME: name,
           CONTENT: content.content,
           DATE: content.date,
-        });
+        }).then(() => fetch());
         setBottomOpened(false);
         break;
       default:
