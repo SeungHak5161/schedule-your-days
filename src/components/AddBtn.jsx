@@ -3,9 +3,9 @@ import { AppContext } from "./Layout";
 
 export const AddBtn = () => {
   const context = useContext(AppContext);
-  const setBottomOpened = context.setBottomOpened;
+  const setAddItemOpened = context.setAddItemOpened;
   return (
-    <button id="addBtn" onClick={() => setBottomOpened(true)}>
+    <button id="addBtn" onClick={() => setAddItemOpened(true)}>
       <div id="plusIcon">
         <div id="plusIconH"></div>
         <div id="plusIconV"></div>

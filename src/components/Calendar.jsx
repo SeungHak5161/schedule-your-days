@@ -3,6 +3,7 @@ import moment from "moment";
 import ddbDocClient from "libs/ddbDocClient";
 import { useContext } from "react";
 import { AppContext } from "./Layout";
+import { deleteItem } from "libs/ddbApi";
 
 export const Calendar = () => {
   const context = useContext(AppContext);
@@ -10,6 +11,8 @@ export const Calendar = () => {
   const active = context.active;
   const setActive = context.setActive;
   const data = context.data;
+  const fetch = context.fetch;
+  const setItemDetail = context.setItemDetail;
 
   const [thisWeek, setThisWeek] = useState([]);
   const [week, setWeek] = useState([]);
@@ -74,7 +77,28 @@ export const Calendar = () => {
               <div className="contentArea">
                 <ul>
                   {day.data.map((e) => {
-                    return <li key={e.POST_NUM}>{e.NAME}</li>;
+                    return (
+                      <li key={e.POST_NUM}>
+                        <div
+                          className="todoItem"
+                          onClick={(click) => {
+                            click.stopPropagation();
+                            setItemDetail(e);
+                          }}
+                        >
+                          {e.NAME}
+                        </div>
+                        <div
+                          className="delItem"
+                          onClick={(click) => {
+                            click.stopPropagation();
+                            deleteItem(e).then(() => fetch());
+                          }}
+                        >
+                          X
+                        </div>
+                      </li>
+                    );
                   })}
                 </ul>
               </div>

@@ -4,15 +4,20 @@ export const ShieldLayer = () => {
   const context = useContext(AppContext);
   const menuOpened = context.menuOpened;
   const setMenuOpened = context.setMenuOpened;
-  const bottomOpened = context.bottomOpened;
-  const setBottomOpened = context.setBottomOpened;
+  const addItemOpened = context.addItemOpened;
+  const setAddItemOpened = context.setAddItemOpened;
+  const itemDetail = context.itemDetail;
+  const setItemDetail = context.setItemDetail;
   return (
     <div
       id="shieldLayer"
-      className={menuOpened || bottomOpened ? "DSblock" : "DSnone"}
+      className={
+        menuOpened || addItemOpened || itemDetail ? "DSblock" : "DSnone"
+      }
       onClick={() => {
         setMenuOpened(false);
-        setBottomOpened(false);
+        setAddItemOpened(false);
+        setItemDetail(false);
       }}
     ></div>
   );

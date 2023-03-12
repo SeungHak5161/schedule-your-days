@@ -34,6 +34,19 @@
         font-size: 2rem;
       }
     }
+    .contentArea {
+      width: calc(100% - 40px);
+      padding: 10px;
+      font-size: 1.5rem;
+      li {
+        display: flex;
+        .delItem {
+          margin-left: 5px;
+          color: red;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .normalStatus {
     // navBar + addBtn + gap
@@ -166,6 +179,21 @@
     #addItemBtn:hover,
     #addItemBtn:focus {
       background-color: var(--blue500);
+    }
+    #updateItemBtn {
+      background-color: var(--green700);
+      font-family: NanumGothicBold, sans-serif;
+      width: 80%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      border-radius: 10px;
+    }
+    #updateItemBtn:hover,
+    #updateItemBtn:focus {
+      background-color: var(--green500);
     }
   }
 }

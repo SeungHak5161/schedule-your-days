@@ -8,6 +8,7 @@ export const Navbar = () => {
   const setMenuOpened = context.setMenuOpened;
   const page = context.page;
   const setPage = context.setPage;
+  const setActive = context.setActive;
   return (
     <nav>
       {menuOpened || (
@@ -21,19 +22,29 @@ export const Navbar = () => {
         id="prevBtn"
         onClick={() => {
           setPage(page - 1);
+          setActive(null);
         }}
       >
         <div id="leftArrowTop"></div>
         <div id="leftArrowMiddle"></div>
         <div id="leftArrowBottom"></div>
       </button>
-      <button id="todayBtn" onClick={() => setPage(0)}>
+      <button
+        id="todayBtn"
+        onClick={() => {
+          if (page !== 0) {
+            setActive(null);
+          }
+          setPage(0);
+        }}
+      >
         {moment().format("DD")}
       </button>
       <button
         id="nextBtn"
         onClick={() => {
           setPage(page + 1);
+          setActive(null);
         }}
       >
         <div id="rightArrowTop"></div>

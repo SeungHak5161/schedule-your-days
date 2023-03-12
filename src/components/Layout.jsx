@@ -7,12 +7,14 @@ import Calendar from "./Calendar";
 import Navbar from "./Navbar";
 import ShieldLayer from "./ShieldLayer";
 import SideMenu from "./SideMenu";
+import ItemDetail from "./ItemDetail";
 
 export const AppContext = createContext({});
 
 export const Layout = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-  const [bottomOpened, setBottomOpened] = useState(false);
+  const [addItemOpened, setAddItemOpened] = useState(false);
+  const [itemDetail, setItemDetail] = useState(false);
   const [page, setPage] = useState(0);
   const [active, setActive] = useState(null);
   const [data, setData] = useState([]);
@@ -38,8 +40,10 @@ export const Layout = () => {
         value={{
           menuOpened,
           setMenuOpened,
-          bottomOpened,
-          setBottomOpened,
+          addItemOpened,
+          setAddItemOpened,
+          itemDetail,
+          setItemDetail,
           page,
           setPage,
           active,
@@ -51,9 +55,10 @@ export const Layout = () => {
       >
         <SideMenu />
         <AddItem />
+        <ItemDetail />
         <main
           className={`${menuOpened ? "op05-ts02" : ""} ${
-            bottomOpened ? "op05-ts03" : ""
+            addItemOpened || itemDetail ? "op05-ts03" : ""
           }`}
         >
           <Navbar />

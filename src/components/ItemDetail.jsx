@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { createItem } from "libs/ddbApi";
+import { updateItem } from "libs/ddbApi";
 import { useContext } from "react";
 import { AppContext } from "./Layout";
 import moment from "moment";
 
-export const AddItem = () => {
+export const ItemDetail = () => {
   const context = useContext(AppContext);
-  const addItemOpened = context.addItemOpened;
-  const setAddItemOpened = context.setAddItemOpened;
+  const itemDetail = context.itemDetail;
+  const setItemDetail = context.setItemDetail;
   const fetch = context.fetch;
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState(itemDetail.NAME);
   const [content, setContent] = useState({
-    content: "",
-    date: moment().format("YYYY-MM-DD"),
+    content: itemDetail.CONTENT,
+    date: itemDetail.DATE,
     // color: "",
   });
 
@@ -28,19 +28,16 @@ export const AddItem = () => {
       case "itemDate":
         setContent({ ...content, date: e.target.value });
         break;
-      case "addItemBtn":
-        createItem({
-          NAME: name,
-          CONTENT: content.content,
-          DATE: content.date,
+      case "updateItemBtn":
+        updateItem({
+          ...itemDetail,
+          update: {
+            NAME: name,
+            CONTENT: content.content,
+            DATE: content.date,
+          },
         }).then(() => fetch());
-        setAddItemOpened(false);
-        setName("");
-        setContent({
-          content: "",
-          date: moment().format("YYYY-MM-DD"),
-          // color: "",
-        });
+        setItemDetail(false);
         break;
       default:
         console.log("addHandler exception");
@@ -49,11 +46,14 @@ export const AddItem = () => {
   };
   return (
     <div
-      className={`bottomUpLayer ${
-        addItemOpened ? "bottomOpend" : "bottomClosed"
-      }`}
+      className={`bottomUpLayer ${itemDetail ? "bottomOpend" : "bottomClosed"}`}
     >
-      <div id="xIcon" onClick={() => setAddItemOpened(false)}>
+      <div
+        id="xIcon"
+        onClick={() => {
+          setItemDetail(false);
+        }}
+      >
         <div id="xIconFirst"></div>
         <div id="xIconSecond"></div>
       </div>
@@ -64,7 +64,7 @@ export const AddItem = () => {
               id="itemName"
               className="inputLarge"
               placeholder="제목"
-              value={name}
+              defaultValue={itemDetail.NAME}
               onChange={addHandler}
             />
           </div>
@@ -76,16 +76,16 @@ export const AddItem = () => {
               id="itemContent"
               className="inputMedium"
               placeholder="내용"
-              value={content.content}
               onChange={addHandler}
-            />
+              defaultValue={itemDetail.CONTENT}
+            ></textarea>
           </div>
         </div>
         <div className="addItemElem">
           <input
             id="itemDate"
             type="date"
-            value={content.date}
+            defaultValue={itemDetail.DATE}
             onChange={addHandler}
           />
         </div>
@@ -98,11 +98,11 @@ export const AddItem = () => {
             />
           </div>
         </div> */}
-        <button id="addItemBtn" className="inputMedium" onClick={addHandler}>
-          추 가
+        <button id="updateItemBtn" className="inputMedium" onClick={addHandler}>
+          수 정
         </button>
       </div>
     </div>
   );
 };
-export default AddItem;
+export default ItemDetail;

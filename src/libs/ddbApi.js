@@ -15,7 +15,7 @@ const createItem = async (params) => {
     if (err) {
       console.error("Error", err);
     } else {
-      console.log('create succeeded:', JSON.stringify(data, null, 2));
+      console.log('create succeeded');
     }
   })
   return data;
@@ -26,7 +26,7 @@ const readItem = async (params) => {
     if (err) {
       console.error("Error", err);
     } else {
-      console.log('read succeeded:', JSON.stringify(data, null, 2));
+      console.log('read succeeded');
     }
   })
   return data;
@@ -46,22 +46,29 @@ const ReadAll = async () => {
 }
 
 const updateItem = async (params) => {
-  const data = await ddbDocClient.update(params, (err, data) => {
+  const data = await ddbDocClient.update({
+    TableName: "SCHEDULES_TB",
+    Key: { POST_NUM: params.POST_NUM, POST_TIME: params.POST_TIME }
+  }, (err, data) => {
     if (err) {
       console.error("Error", err);
     } else {
-      console.log('update succeeded:', JSON.stringify(data, null, 2));
+      console.log('update succeeded');
     }
   })
   return data;
 }
 
 const deleteItem = async (params) => {
-  const data = await ddbDocClient.delete(params, (err, data) => {
+  const data = await ddbDocClient.delete({
+    TableName: "SCHEDULES_TB",
+    Key: { POST_NUM: params.POST_NUM, POST_TIME: params.POST_TIME },
+    Item: { ...params.update }
+  }, (err, data) => {
     if (err) {
       console.error("Error", err);
     } else {
-      console.log('delete succeeded:', JSON.stringify(data, null, 2));
+      console.log('delete succeeded');
     }
   })
   return data;
