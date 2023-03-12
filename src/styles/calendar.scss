@@ -13,16 +13,20 @@
     background-color: var(--grey800);
     border-radius: 20px;
     display: flex;
-    // align-items: center;
+    align-items: center;
     padding: 5px;
+    overflow: hidden;
     .dateArea {
-      width: 30px;
-      height: 35px;
+      width: 40px;
+      height: 45px;
+      padding: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       font-family: NanumGothicBold, sans-serif;
+      border-radius: 10px;
+      background-color: var(--greyOpacity600);
       .dateAreaMonth {
         font-size: 1.5rem;
       }
@@ -32,15 +36,18 @@
     }
   }
   .normalStatus {
-    height: 100px;
-    transition: 0.2s;
-  }
-  .expandStatus {
-    height: 430px;
+    // navBar + addBtn + gap
+    height: calc((100vh - (60 + 95 + 60) * 1px) / 7);
     transition: 0.2s;
   }
   .contractStatus {
-    height: 45px;
+    // 절반으로 줄어듦
+    height: calc((100vh - (60 + 95 + 60) * 1px) / 7 / 2);
+    transition: 0.2s;
+  }
+  .expandStatus {
+    // 나머지가 줄어든 만큼 늘어남
+    height: calc((100vh - (60 + 95 + 60) * 1px) / 7 / 2 * (6 + 2));
     transition: 0.2s;
   }
 }
@@ -72,14 +79,13 @@
     .addItemElem {
       width: 80%;
       display: flex;
-      border-bottom: var(--grey300) 1px solid;
       align-items: center;
       .addItemElemInput {
         width: 100%;
         height: 100%;
+        border-bottom: var(--grey300) 1px solid;
         input {
           width: 100%;
-          height: 30px;
           color: white;
           border: none;
           background-color: transparent;
@@ -87,19 +93,55 @@
         input:focus {
           outline: none;
         }
-        // input:focus::placeholder {
-        //   color: transparent;
-        // }
+        textarea {
+          width: 100%;
+          color: white;
+          border: none;
+          background-color: transparent;
+        }
+        textarea:focus {
+          outline: none;
+        }
+        #itemName {
+          height: 4rem;
+        }
+        #itemContent {
+          height: 8rem;
+        }
+      }
+      .addItemElem:first-child {
+        position: relative;
       }
       #colorPicker {
+        position: absolute;
+        right: calc(10%);
         width: 25px;
         height: 25px;
         border-radius: 50%;
         background-color: var(--skyBlue);
       }
-    }
-    .addItemElem:last-child {
-      border-bottom: none;
+      input[type="date"] {
+        width: 100%;
+        color: white;
+        border: none;
+        background-color: transparent;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        color: transparent;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        // bottom: 0;
+        // right: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
     .inputLarge {
       width: calc(100% - 25px);

@@ -1,5 +1,4 @@
-import { ReadAll } from "libs/ddbApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 import ddbDocClient from "libs/ddbDocClient";
 import { useContext } from "react";
@@ -7,28 +6,16 @@ import { AppContext } from "./Layout";
 
 export const Calendar = () => {
   const context = useContext(AppContext);
-  const [data, setData] = useState([]);
   const page = context.page;
   const active = context.active;
   const setActive = context.setActive;
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const item = await ReadAll();
-        console.log(item.Items);
-        setData(item.Items);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    // fetch();
-  }, []);
+  const data = context.data;
 
   const datum = [-1, 0, 1, 2, 3, 4, 5];
   const week = datum.map((e) => {
     const day = moment().add(7 * page + e, "d");
     return {
+      full: day.format("YYYY-MM-DD"),
       month: day.format("MM").replace(/(^0+)/, ""),
       day: day.format("DD"),
     };
@@ -40,7 +27,7 @@ export const Calendar = () => {
         {week.map((e, idx) => {
           return (
             <div
-              key={idx + 1}
+              key={e.full}
               className={`weekItem ${
                 !active
                   ? "normalStatus"
